@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Block Rooms</title>
+</head>
+<body>
+<div class="container mt-5 min-vh-100">
+    <div class="form-container m-3">
+        <h1>Block Room:</h1>
+        <form method="POST" th:action="@{/admin/workspaces/block-workspace}">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Date:</td>
+                    <td><input type="date" name="date" class="form-control" id="date" required></td>
+                </tr>
+                <tr>
+                    <td>Start Period:</td>
+                    <td><input type="time" name="start" class="form-control" id="filterStart" required></td>
+                </tr>
+                <tr>
+                    <td>End Period:</td>
+                    <td><input type="time" name="end" class="form-control" id="filterEnd" required></td>
+                </tr>
+                <tr>
+                    <td>Workspace:</td>
+                    <td>
+                        <select name="workspaceName" id="workspaceName" >
+                                <span th:each="workspace : ${workspaces}" th:object="${workspaces}">
+                                    <option th:text="${workspace.getName()}"></option>
+                            </span>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div class="float-xl-start">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+            <div class="float-xl-end">
+                <a class="btn btn-outline-secondary btn-block" th:href="@{/admin/view-bookings}">Return Bookings</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

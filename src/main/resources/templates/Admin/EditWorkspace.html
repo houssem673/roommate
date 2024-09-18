@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Edit Room</title>
+</head>
+<body>
+<div class="container mt-5 min-vh-100">
+    <div class="form-container">
+        <h1>Edit Workspace <span th:text="${workspace.getName()}"></span></h1> <!-- Zeige den Namen des zu bearbeitenden Workspaces an -->
+        <main class="row">
+            <section class="mt-5">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-action" th:each="w : ${workspaces}" th:object="${workspace}"> <!-- workspaces statt workspace -->
+                        <a th:href="@{/admin/workspaces/edit/{id}(id=${w.getId()})}"><span th:text="${w.getName()}">Workspace A</span></a> <!-- th:href statt {} -->
+                    </li>
+                </ul>
+            </section>
+            <section class="mt-5">
+                <h2>Edit Workspace</h2>
+                <form method="POST" th:action="@{/admin/workspaces/edit/{id}(id=${workspace.getId()})}">
+                    <label for="name" class="text"><strong>Name:</strong></label>
+                    <input id="name" type="text" class="form-control" placeholder="name" name="name" th:value="${workspace.getName()}" >
+                    <label for="roomname" class="text"><strong>Roomname:</strong></label>
+                    <input id="roomname" type="text" class="form-control" placeholder="Roomname" name="roomname" th:value="${workspace.getRoomname()}" >
+                    <button class="mt-2 btn btn-primary" type="submit">Edit Workspace</button>
+                </form>
+            </section>
+        </main>
+        </div>
+</div>
+</body>
+</html>

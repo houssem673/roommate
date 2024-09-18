@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./RoomMateData:/var/lib/postgresql/data"
+    environment:
+      - "POSTGRES_USER=mrbean"
+      - "POSTGRES_PASSWORD=teddy"

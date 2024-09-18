@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>Workspaces</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-1">
+    <h1 style=""> Workspaces</h1>
+    <h2>Result of filtering</h2>
+    <strong>Desired Timeperiod: </strong>
+    <span th:text="${param.date}"></span> from <span th:text="${param.start}"></span> till <span
+        th:text="${param.end}"></span>. <br>
+    <a href="booking">Go back to filter</a>
+</div>
+
+<div class="container mt-5">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Nr</th>
+            <th>Name</th>
+            <th>Room Name</th>
+            <th>Equipment</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="w, rowStat : ${workspaces}" th:object="${workspaces}">
+            <td>
+                <span th:text="${rowStat.count}"></span>
+            </td>
+            <td>
+                <span th:text="${w.getName()}"></span>
+            </td>
+
+            <td>
+                <span th:text="${w.getRoomname()}"></span>
+            </td>
+            <td>
+                <span th:each="equipment, iterStat : ${w.equipments}">
+                    <span th:text="${equipment.description()}"></span>
+                    <span th:if="${!iterStat.last}"></span><br th:if="${!iterStat.last}"/>
+                </span>
+            </td>
+            <td>
+                <form action="/bookingconfirmation" method="get">
+                    <input type="hidden" name="date" id="date" th:value="${param.date}"/>
+                    <input type="hidden" name="start" id="start" th:value="${param.start}"/>
+                    <input type="hidden" name="end" id="end" th:value="${param.end}"/>
+                    <input type="hidden" name="workspaceId" id="workspace_id" th:value="${w.getId()}">
+                    <input type="hidden" name="workspacename" id="workspacename" th:value="${w.getName()}">
+                    <input type="hidden" name="roomname" id="roomname" th:value="${w.getRoomname()}">
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Book</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+        <h2>Booking Confirmation</h2>
+        <p>Selected Date: <span th:text="${param.date}"></span></p>
+        <p>Start Time: <span th:text="${param.start}"></span></p>
+        <p>End Time: <span th:text="${param.end}"></span></p>
+        <p>Workspace: <span th:text="${param.workspacename}"></span></p>
+        <p>Room: <span th:text="${param.roomname}"></span></p>
+    <form method="post" th:action="@{/bookingconfirmation}">
+        <input type="hidden" name="date" id="date" th:value="${param.date}"/>
+        <input type="hidden" name="start" id="start" th:value="${param.start}"/>
+        <input type="hidden" name="end" id="end" th:value="${param.end}"/>
+        <input type="hidden" name="workspaceId" id="workspace_id" th:value="${param.workspaceId}">
+        <input type="hidden" name="roomname" id="roomname" th:value="${param.roomname}">
+        <button type="submit" class="btn btn-primary btn-block mt-3">Confirm Booking</button>
+    </form>
+    <button type="submit" class="btn btn-primary btn-block mt-3">
+        <a th:href="@{/booking}" class="custom-link" style="color: white;">Return to Menu</a>
+    </button>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=" UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Edit Booking</title>
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <h1>Edit Booking: <span th:text="${booking.getId}"></span></h1>
+        <form method="POST" th:action="@{/admin/edit-booking/{id}(id=${booking.getId})}" th:object="${booking}">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Date:</td>
+                    <td><input type="date" name="date" class="form-control" id="date" required
+                               th:value="${booking.getBookingDay()}"></td>
+                </tr>
+                <tr>
+                    <td>Start Period:</td>
+                    <td><input type="time" name="start" class="form-control" id="filterStart" required
+                               th:value="${booking.getStartTime()}"></td>
+                </tr>
+                <tr>
+                    <td>End Period:</td>
+                    <td><input type="time" name="end" class="form-control" id="filterEnd" required
+                               th:value="${booking.getEndTime()}"></td>
+                </tr>
+                <tr>
+                    <td>Workspace:</td>
+                    <td>
+                        <select name="workspaceName" id="workspaceName" >
+                                <span th:each="workspace : ${workspaces}" th:object="${workspaces}">
+                                    <option th:text="${workspace.getName()}"></option>
+                            </span>
+                        </select>
+                        <!--                        <input type="text" name="workspaceId" class="form-control" id="workspaceId" required th:value="${booking.getWorkspaceID()}">-->
+                    </td>
+                </tr>
+            </table>
+            <div class="float-xl-start">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+            <div class="float-xl-end">
+                <a class="btn btn-danger btn-block" th:href="@{/admin/view-bookings}">Return Bookings</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

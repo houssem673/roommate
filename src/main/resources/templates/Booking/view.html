@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking View</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <h1 class="btn-primary">Welcome, <span th:text="${username}"></span>!</h1>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <div><h2>Here are all your bookings</h2></div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Booking Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="booking : ${bookings}">
+                    <td th:text="${booking.bookingDay}"></td>
+                    <td th:text="${booking.startTime}"></td>
+                    <td th:text="${booking.endTime}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-outline-secondary" href="/">Homepage</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

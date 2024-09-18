@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Propra Glossar</title>
+</head>
+<body>
+<div class="container mt-5 min-vh-100">
+    <header class="row">
+        <h1>Workspace</h1>
+        <section class="mt-5">
+            <a class="btn btn-outline-secondary" href="/admin/workspaces">Workspaces</a>
+        </section>
+    </header>
+    <main class="row">
+        <section class="mt-5">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action" th:each="w : ${workspace}" th:object="${workspace}">
+                    <a th:href="@{/admin/workspaceDetails(nr=${w.getId()})}"><span th:text="${w.getName()}">Workspace A</span></a>
+                </li>
+            </ul>
+        </section>
+        <section class="mt-5">
+            <h2>Add a new Workspace</h2>
+            <form method="post" th:action="@{/admin/add-new-workspace}">
+                <label for="workspace" class="visually-hidden">Workspace</label>
+                <input id="workspace" type="text" class="form-control" placeholder="Workspace" name="workspace" required>
+
+                <label for="roomname" class="visually-hidden">Roomname</label>
+                <input id="roomname" type="text" class="form-control" placeholder="Roomname" name="roomname" required>
+
+                <button class="mt-2 btn btn-primary" type="submit">Add Workspace</button>
+
+            </form>
+        </section>
+    </main>
+    </div>
+</body>
+</html>

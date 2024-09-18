@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Workspace Administration</title>
+</head>
+<body>
+
+<div class="container mt-5 min-vh-100">
+    <div class="d-flex justify-content-between align-items-center m-3">
+        <h1 class="align-content-center">Workspaces</h1>
+        <a class="btn btn-outline-dark bg-gradient ml-auto" href="/admin/workspaces/add-new-workspace">Add New Workspace</a>
+    </div>
+    <div>
+        <table class="table table-striped shadow-lg">
+            <thead>
+            <tr>
+                <th scope="col">Workspace Nr</th>
+                <th scope="col">Name</th>
+                <th scope="col">Equipment</th>
+                <th scope="col">Room</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="w : ${workspace}" th:object="${workspace}">
+                <td><span th:text="${w.getId()}"></span></td>
+                <td><span th:text="${w.getName()}"></span></td>
+                <td>
+                    <span th:each="equipment, iterStat : ${w.equipments}">
+                <span th:text="${equipment.description()}"></span>
+                <span th:if="${!iterStat.last}">,</span><br th:if="${!iterStat.last}"/>
+                    </span>
+                </td>
+                <td><span th:text="${w.getRoomname()}"></span></td>
+                <td>
+                    <div class="d-flex justify-content-end">
+                        <form th:action="@{/admin/workspaces/edit/{id}(id=${w.getId()})}" method="GET">
+                        <button class="btn btn-outline-primary me-2" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M13.646 1.646a.5.5 0 0 1 .708 0l.5.5a.5.5 0 0 1 0 .708L2.774 14.56a.5.5 0 0 1-.348.15H1.5a.5.5 0 0 1-.5-.5v-1.376a.5.5 0 0 1 .15-.353L13.646 1.646zM14 1L1 14.268V15h.732L14 1.732V1z"></path>
+                                <path fill-rule="evenodd" d="M1.146 14.354l11-11 .708.708-11 11-.708-.708z"></path>
+                            </svg>
+                        </button>
+                        </form>
+                        <form method="POST" th:action="@{/admin/workspaces/delete/{id}(id = ${w.getId()})}">
+                            <button class="btn btn-outline-danger" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M13.5 3h-13l-1 12h15l-1-12zm-7.5-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v1h-7V1zm2 1v1h3V2h-3z"></path>
+                                    <path fill-rule="evenodd"
+                                          d="M5.5 6.5A.5.5 0 0 0 6 7v5.5a.5.5 0 0 0 1 0V7a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm3 0a.5.5 0 0 0 .5-.5v5.5a.5.5 0 0 0 1 0V7a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5z"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a class="btn btn-outline-secondary bg-gradient ml-auto" href="/admin">Admin Navigation</a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+@startuml
+
+
+
+
+package webschnittstelle {
+
+class WorkspaceWebUI <<Controller>>
+class BookingWebUI <<Controller>>
+
+}
+package booking{
+class BookingService
+class Booking<<AggregateRoot>>
+class BookingDbStuff
+
+}
+package workspace{
+class WorkspaceService<<Component>>
+class WorkspaceDBStuff<<Component>>
+class Workspace<<AggregateRoot>>{
+}
+
+WorkspaceWebUI --> WorkspaceService
+WorkspaceService --> WorkspaceDBStuff
+WorkspaceService --> Workspace
+
+BookingWebUI --> BookingService
+BookingService--> BookingDbStuff
+BookingService-->  Booking
+
+
+@enduml
+
+class ReservationPeriod<<value>> {
+- LocalDateTime start
+- LocalDateTime end
+}
+class Room<<value>>
+class Ausstatungen<<value>> {
+
+}

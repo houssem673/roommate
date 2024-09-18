@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>RoomMate</title>
+</head>
+<body>
+<div class="container">
+    <header class="row">
+        <h1 th:text="${workspace.name}">Workspace A</h1>
+    </header>
+    <main class="row">
+        <section class="mt-5">
+            <h2>Equipments</h2>
+            <ul  class="list-group" th:remove="all-but-first">
+                <li class="list-group-item" th:each="e : ${workspace.getEquipments()}">
+                    <span th:utext="${e.description()}">HDMI</span>
+                </li>
+                <li class="list-group-item">
+                    <span>USBC</span>
+                </li>
+                <li class="list-group-item">
+                    <span>LAN-Cable</span>
+                </li>
+            </ul>
+        </section>
+        <section class="mt-5">
+            <h2>add Equipment</h2>
+            <form method="post" th:action="@{/admin/addEquipment}">
+                <input type="hidden" name="id" th:value="${workspace.id}" required>
+                <label for="equipId" class="visually-hidden">new Equipments</label>
+                <textarea id="equipId" class="form-control" name="equipment" required></textarea>
+                <button class="mt-2 btn btn-primary" type="submit">add Equipment</button>
+            </form>
+        </section>
+        <section class="mt-5">
+            <a href="/admin/workspaces">Workspace Administration</a>
+        </section>
+
+    </main>
+</div>
+</body>
+</html>
