@@ -1,7 +1,7 @@
 # roommate
 
 
-Project Roommate within the Subject programming internship or "Programmierpraktikum" :
+Project Roommate within the Subject programming internship or "Programmierpraktikum"  at the Heinrich Heine University :
 - HTML , CSS , Java 21 , Bootstrap
 - Spring Boot Framework : Spring Web , Spring Security , Spring JDBC API , Spring Data JDBC
 - Thymeleaf
