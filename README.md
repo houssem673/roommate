@@ -1,5 +1,6 @@
 # roommate
-
+Summary:
+Booking System for the University Library that communicates with a Keymaster that makes sure the booking codes are correct and unique .
 
 Project Roommate within the Subject programming internship or "Programmierpraktikum"  at the Heinrich Heine University :
 - HTML , CSS , Java 21 , Bootstrap
